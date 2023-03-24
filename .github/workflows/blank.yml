@@ -29,8 +29,12 @@ jobs:
       - name: Run a multi-line script
         if: ${{ github.head_ref }} == 'shharrnam-patch-1'
         run: |
-          echo Failing Job intentionally for branch ${{ github.head_ref }}
-          exit 1
+          echo ${{ github.ref }}
+          if [[ ${{ github.ref }} ==  'shharrnam-patch-1']]; then
+            exit 1
+          else
+            echo "Passed"
+          fi
           
       - name: Pass
         run: echo passing on branch ${{ github.head_ref }}
